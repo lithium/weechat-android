@@ -132,6 +132,7 @@ public class WeechatActivity extends SherlockFragmentActivity implements RelayCo
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
         
         updateTitle();
+        getSupportActionBar().setHomeButtonEnabled(true);
         
         // TODO: make notification load the right buffer
         // TODO: add preference to hide the TitlePageIndicator
@@ -254,6 +255,11 @@ public class WeechatActivity extends SherlockFragmentActivity implements RelayCo
     // Handle the options when the user presses the Menu key
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+        case android.R.id.home: {
+            if (viewPager != null)
+                viewPager.setCurrentItem(0);
+            break;
+        }
         case R.id.menu_connection_state: {
             if (rsb != null) {
                 taskToggleConnection = new SocketToggleConnection();
