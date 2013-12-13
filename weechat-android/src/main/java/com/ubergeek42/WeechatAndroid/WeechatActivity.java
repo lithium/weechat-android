@@ -66,8 +66,8 @@ public class WeechatActivity extends SherlockFragmentActivity implements RelayCo
     
     private ViewPager viewPager;
     private MainPagerAdapter mainPagerAdapter;
-    private TitlePageIndicator titleIndicator;
-    
+//    private TitlePageIndicator titleIndicator;
+
     private boolean tabletMode = false;
 
    /** Called when the activity is first created. */
@@ -118,17 +118,21 @@ public class WeechatActivity extends SherlockFragmentActivity implements RelayCo
         }
         viewPager.setAdapter(mainPagerAdapter);
         viewPager.setOffscreenPageLimit(10);// TODO: probably a crash if more than 10 buffers, and screen rotates
+        viewPager.setOnPageChangeListener(this);
+        viewPager.setCurrentItem(0);
+
         // see: http://stackoverflow.com/questions/11296411/fragmentstatepageradapter-illegalstateexception-myfragment-is-not-currently
 
-        titleIndicator = (TitlePageIndicator) findViewById(R.id.main_titleviewpager);
-        titleIndicator.setViewPager(viewPager);
-        titleIndicator.setOnPageChangeListener(this);
-        titleIndicator.setCurrentItem(0);
+//        titleIndicator = (TitlePageIndicator) findViewById(R.id.main_titleviewpager);
+//        titleIndicator.setViewPager(viewPager);
+//        titleIndicator.setOnPageChangeListener(this);
+//        titleIndicator.setCurrentItem(0);
 
         // TODO Read preferences from background, its IO, 31ms strict mode!
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
         
         updateTitle();
+        getSupportActionBar().setHomeButtonEnabled(true);
         
         // TODO: make notification load the right buffer
         // TODO: add preference to hide the TitlePageIndicator
@@ -151,7 +155,7 @@ public class WeechatActivity extends SherlockFragmentActivity implements RelayCo
             return;
         }
         mainPagerAdapter.openBuffer(buffer);
-        titleIndicator.setCurrentItem(viewPager.getCurrentItem());
+//        titleIndicator.setCurrentItem(viewPager.getCurrentItem());
     }
 
 
@@ -251,6 +255,11 @@ public class WeechatActivity extends SherlockFragmentActivity implements RelayCo
     // Handle the options when the user presses the Menu key
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+        case android.R.id.home: {
+            if (viewPager != null)
+                viewPager.setCurrentItem(0);
+            break;
+        }
         case R.id.menu_connection_state: {
             if (rsb != null) {
                 taskToggleConnection = new SocketToggleConnection();
@@ -362,7 +371,7 @@ public class WeechatActivity extends SherlockFragmentActivity implements RelayCo
             @Override
             public void run() {
                 mainPagerAdapter.closeBuffer(bufferName);
-                titleIndicator.setCurrentItem(viewPager.getCurrentItem());
+//                titleIndicator.setCurrentItem(viewPager.getCurrentItem());
             }
         });
         updateTitle();
