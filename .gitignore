@@ -1,5 +1,6 @@
 # Android
 local.properties
+gradle.properties
 
 # Android Studio/InteliJ IDEA
 .idea
