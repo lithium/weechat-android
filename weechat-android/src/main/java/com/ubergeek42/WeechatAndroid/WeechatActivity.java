@@ -67,7 +67,7 @@ public class WeechatActivity extends SherlockFragmentActivity implements RelayCo
     private ViewPager viewPager;
     private MainPagerAdapter mainPagerAdapter;
 //    private TitlePageIndicator titleIndicator;
-    
+
     private boolean tabletMode = false;
 
    /** Called when the activity is first created. */
@@ -118,6 +118,9 @@ public class WeechatActivity extends SherlockFragmentActivity implements RelayCo
         }
         viewPager.setAdapter(mainPagerAdapter);
         viewPager.setOffscreenPageLimit(10);// TODO: probably a crash if more than 10 buffers, and screen rotates
+        viewPager.setOnPageChangeListener(this);
+        viewPager.setCurrentItem(0);
+
         // see: http://stackoverflow.com/questions/11296411/fragmentstatepageradapter-illegalstateexception-myfragment-is-not-currently
 
 //        titleIndicator = (TitlePageIndicator) findViewById(R.id.main_titleviewpager);
