@@ -59,8 +59,8 @@
 		    <string name="pref_ssh_pass">SSH Password/Key Passphrase</string>
 		    <string name="pref_ssh_keyfile">SSH Private Key File</string>
     <string name="pref_bufferlist_group">Buffer List Settings</string>
-	    <string name="pref_sort_buffers">Sort bufferlist</string>
-	    <string name="pref_sort_buffers_summary">Sort by number of highlights/unread messages</string>
+	    <string name="pref_sort_buffers">Sort buffers by highlights</string>
+	    <string name="pref_sort_buffers_summary">Sort buffer list by unread or highlighted count.</string>
 	    <string name="pref_hide_server_buffers">Hide Server Buffers</string>
 	    <string name="pref_hide_server_buffers_summary">Hides server buffers(eg. irc.freenode)</string>
 	    <string name="pref_hide_buffer_titles">Hide buffer titles</string>

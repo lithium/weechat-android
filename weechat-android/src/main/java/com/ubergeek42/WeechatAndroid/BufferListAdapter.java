@@ -83,7 +83,7 @@ public class BufferListAdapter extends BaseAdapter implements OnSharedPreference
                 }
             }
         }
-        if (sortedBuffers) Collections.sort(filteredBuffers, bufferComparator);
+        Collections.sort(filteredBuffers, bufferComparator);
         notifyDataSetChanged();
     }
 
@@ -192,12 +192,21 @@ public class BufferListAdapter extends BaseAdapter implements OnSharedPreference
     private final Comparator<Buffer> bufferComparator = new Comparator<Buffer>() {
         @Override
         public int compare(Buffer b1, Buffer b2) {
-            int b1Highlights = b1.getHighlights();
-            int b2Highlights = b2.getHighlights();
-            if (b2Highlights > 0 || b1Highlights > 0) {
-                return b2Highlights - b1Highlights;
+
+            if (sortedBuffers) {
+                int b1Highlights = b1.getHighlights();
+                int b2Highlights = b2.getHighlights();
+                if (b2Highlights > 0 || b1Highlights > 0) {
+                    return b2Highlights - b1Highlights;
+                }
+                if (b1.getUnread() > 0 || b2.getUnread() > 0) {
+                    return b2.getUnread() - b1.getUnread();
+                }
             }
-            return b2.getUnread() - b1.getUnread();
+            if (b1.getShortName() != null && b2.getShortName() != null) {
+                return b1.getShortName().compareTo(b2.getShortName());
+            }
+            return 0;
         }
     };
 
