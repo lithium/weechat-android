@@ -17,6 +17,7 @@ package com.ubergeek42.WeechatAndroid;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.LinkedList;
 
 import android.content.SharedPreferences;
@@ -156,6 +157,13 @@ public class ChatLinesAdapter extends BaseAdapter implements ListAdapter,
                         TextView.BufferType.SPANNABLE);
             } else {
                 holder.prefix.setText(chatLine.getPrefix());
+            }
+
+            boolean isOwnNick = Arrays.asList(chatLine.getTags()).contains("prefix_nick_white");
+            if (isOwnNick) {
+               holder.prefix.setTextAppearance(activity, R.style.TextAppearance_prefix_nick_white);
+            } else {
+                holder.prefix.setTextAppearance(activity, R.style.TextAppearance_prefix_nick_default);
             }
         }
         if (prefix_align.equals("right")) {
