@@ -30,12 +30,5 @@
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
-        
-        <!-- For crash reporting -->
-        <activity android:name="org.acra.CrashReportDialog"
-        android:theme="@android:style/Theme.Dialog"
-        android:launchMode="singleInstance"
-        android:excludeFromRecents="true"
-        android:finishOnTaskLaunch="true" />
     </application>
 </manifest>
